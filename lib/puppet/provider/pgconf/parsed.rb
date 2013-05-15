@@ -19,7 +19,7 @@ Puppet::Type.type(:pgconf).provide(
 
       # simple string and numeric values don't need to be enclosed in quotes
       dontneedquote = h[:value].match(/^(\w+|[0-9.-]+)$/)
-      dontneedequal = h[:name].match(/^include$/i)
+      dontneedequal = h[:name].match(/^(include|include_if_exists)$/i)
 
       str =  h[:name].downcase # normalize case
       str += dontneedequal ? ' ' : ' = '
