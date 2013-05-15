@@ -12,9 +12,9 @@ Puppet::Type.type(:pgconf).provide(
   text_line :blank, :match => /^\s*$/
 
   record_line :parsed,
-    :fields   => %w{name value crap comment},
-    :optional => %w{crap comment},
-    :match    => /^\s*(\w+)\s*=?\s*(.*?)(\s*#\s*(.*))?\s*$/,
+    :fields   => %w{name value comment},
+    :optional => %w{comment},
+    :match    => /^\s*(\w+)\s*=?\s*(.*?)(?:\s*#\s*(.*))?\s*$/,
     :to_line  => proc { |h|
 
       # simple string and numeric values don't need to be enclosed in quotes
