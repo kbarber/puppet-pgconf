@@ -189,6 +189,15 @@ describe provider_class do
       genpgconf(pgconf).should == "include 'site.conf'\n"
     end
 
+    it "should treat include_if_exists the same as include directive" do
+      pgconf = mkpgconf(
+        :name   => 'include_if_exists',
+        :value  => 'optional.conf',
+        :ensure => 'present'
+      )
+      genpgconf(pgconf).should == "include_if_exists 'optional.conf'\n"
+    end
+
   end
 
 end
