@@ -189,6 +189,33 @@ describe provider_class do
       genpgconf(pgconf).should == "include 'site.conf'\n"
     end
 
+    it "should not quote simple strings from enum settings" do
+      pgconf = mkpgconf(
+        :name   => 'backslash_quote',
+        :value  => 'safe_encoding',
+        :ensure => 'present'
+      )
+      genpgconf(pgconf).should == "backslash_quote = safe_encoding\n"
+    end
+
+    it "should not quote booleans from enum settings" do
+      pgconf = mkpgconf(
+        :name   => 'backslash_quote',
+        :value  => 'off',
+        :ensure => 'present'
+      )
+      genpgconf(pgconf).should == "backslash_quote = off\n"
+    end
+
+    it "should properly quote advanced strings from enum settings" do
+      pgconf = mkpgconf(
+        :name   => 'default_transaction_isolation',
+        :value  => 'repeatable read',
+        :ensure => 'present'
+      )
+      genpgconf(pgconf).should == "default_transaction_isolation = 'repeatable read'\n"
+    end
+
   end
 
 end
